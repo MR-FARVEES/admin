@@ -1,20 +1,89 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { useEffect } from "react";
+import { Configuration } from "./interfaces/config";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import { Login } from "./screens/auth/Login";
+import { RegisterAccount } from "./screens/auth/RegisterAccount";
+import { PrimaryUI } from "./screens/ui/PrimaryUI";
+import RegisterCompany from "./screens/auth/RegisterCompany";
+import { CompanyProps } from "./interfaces/company";
+
+const Stack = createStackNavigator();
 
 export default function App() {
+  useEffect(() => {
+    const client = dgram.createSocket("udp4");
+  }, []);
+
+  const ip = "172.20.24.244";
+  const config: Configuration = {
+    name: "default",
+    primaryColor: "#06C167",
+    secondaryColor: "#142328",
+    backgroundColor: "#FFFFFF",
+    surfaceColor: "#E6E6E6",
+    tabBarPrimaryColor: "#FFFFFF",
+    tabBarSecondaryColor: "#EEEEEE",
+    textPrimaryColor: "#000000",
+    textSecondaryColor: "#6B6B6B",
+    buttonPrimaryColor: "#000000",
+    buttonSecondaryColor: "#FFFFFF",
+    borderColor: "#000000",
+  };
+
+  const company: CompanyProps = {
+    companyName: "FTECH",
+    contact: "",
+    address: "",
+    branch: "",
+  };
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator
+        initialRouteName="Login"
+        screenOptions={{
+          headerStyle: { backgroundColor: "#FFFFFF" },
+          headerTintColor: config.textPrimaryColor,
+        }}
+      >
+        <Stack.Screen name="Login" initialParams={{ config, ip, company }}>
+          {(props: any) => (
+            <Login {...props} config={config} ip={ip} company={company} />
+          )}
+        </Stack.Screen>
+        <Stack.Screen
+          name="RegisterAccount"
+          initialParams={{ config, ip, company }}
+        >
+          {(props: any) => (
+            <RegisterAccount
+              {...props}
+              config={config}
+              ip={ip}
+              company={company}
+            />
+          )}
+        </Stack.Screen>
+        <Stack.Screen
+          name="RegisterCompany"
+          initialParams={{ config, ip, company }}
+        >
+          {(props: any) => (
+            <RegisterCompany
+              {...props}
+              config={config}
+              ip={ip}
+              company={company}
+            />
+          )}
+        </Stack.Screen>
+        <Stack.Screen name="PrimaryUI" initialParams={{ config, ip, company }}>
+          {(props: any) => (
+            <PrimaryUI {...props} config={config} ip={ip} company={company} />
+          )}
+        </Stack.Screen>
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
