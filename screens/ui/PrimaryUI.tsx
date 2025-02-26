@@ -4,7 +4,8 @@ import { BackHandler } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
 import DashboardView from "./views/Dashboard";
-import ManageStaff from "./views/ManageStaff";
+import ManageStaffView from "./views/ManageStaff";
+import ManageProductView from "./views/MangeProduct";
 
 const Tab = createBottomTabNavigator();
 
@@ -12,6 +13,7 @@ export function PrimaryUI({ navigation, config, ip, company }: any) {
   useEffect(() => {
     navigation.setOptions({
       title: company?.companyName,
+      headerShown: false,
       gestureEnabled: false,
       headerLeft: () => null,
       headerRight: () => (
@@ -54,14 +56,14 @@ export function PrimaryUI({ navigation, config, ip, company }: any) {
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
-        tabBarStyle: { height: 70, paddingTop: 5 },
+        tabBarStyle: { height: 70 },
         tabBarItemStyle: { paddingHorizontal: 0 },
         tabBarLabelStyle: { fontSize: 12 },
         tabBarIcon: ({ color, size }) => {
           let iconName: keyof typeof Ionicons.glyphMap = "help-circle";
           if (route.name == "Dashboard") {
             iconName = "rocket";
-          } else if (route.name == "Staff") {
+          } else if (route.name == "Staffs") {
             iconName = "document-text";
           } else if (route.name == "Products") {
             iconName = "gift";
@@ -80,8 +82,11 @@ export function PrimaryUI({ navigation, config, ip, company }: any) {
       <Tab.Screen name="Dashboard" initialParams={config}>
         {(props: any) => <DashboardView {...props} config={config} ip={ip} />}
       </Tab.Screen>
-      <Tab.Screen name="Staff" initialParams={config}>
-        {(props: any) => <ManageStaff {...props} config={config} ip={ip} />}
+      <Tab.Screen name="Staffs" initialParams={config}>
+        {(props: any) => <ManageStaffView {...props} config={config} ip={ip} />}
+      </Tab.Screen>
+      <Tab.Screen name="Products" initialParams={config}>
+        {(props: any) => <ManageProductView {...props} config={config} ip={ip} />}
       </Tab.Screen>
     </Tab.Navigator>
   );

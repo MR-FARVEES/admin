@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import AllStaff from "./Staff/AllStaff";
 import NewStaff from "./Staff/NewStaff";
 
-export default function ManageStaff({ config, ip }: any) {
+export default function ManageStaffView({ config, ip }: any) {
   const [currentTab, setCurrentTab] = useState("All");
 
   const handleTabSelection = (currentTab: string) => {
@@ -64,6 +64,7 @@ const styles = StyleSheet.create({
   },
   header: {
     marginLeft: 5,
+    marginTop: 40,
     fontSize: 24,
     fontWeight: 600,
   },

@@ -18,7 +18,7 @@ import { UserProps } from "../../interfaces/user";
 const { width } = Dimensions.get("window");
 const isTablet = width > 600;
 
-export default function RegisterCompany({ navigation, config, ip }: any) {
+export function RegisterCompany({ navigation, config, ip }: any) {
   const [isKeyboardVisible, setIsKeyboardVisible] = useState(false);
   const [formCompanyData, setFormCompanyData] = useState<CompanyProps>({
     companyName: "",

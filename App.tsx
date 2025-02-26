@@ -1,21 +1,18 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Configuration } from "./interfaces/config";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { Login } from "./screens/auth/Login";
 import { RegisterAccount } from "./screens/auth/RegisterAccount";
 import { PrimaryUI } from "./screens/ui/PrimaryUI";
-import RegisterCompany from "./screens/auth/RegisterCompany";
+import { RegisterCompany } from "./screens/auth/RegisterCompany";
 import { CompanyProps } from "./interfaces/company";
+import axios from "axios";
 
 const Stack = createStackNavigator();
 
 export default function App() {
-  useEffect(() => {
-    const client = dgram.createSocket("udp4");
-  }, []);
-
-  const ip = "172.20.24.244";
+  const ip = "172.20.28.28";
   const config: Configuration = {
     name: "default",
     primaryColor: "#06C167",
