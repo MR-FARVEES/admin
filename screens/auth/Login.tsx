@@ -186,7 +186,7 @@ export function Login({ navigation, config, ip, company }: any) {
 
 const styles = StyleSheet.create({
   container: {
-    width: isTablet ? "50%" : "100%",
+    width: "100%",
     height: "100%",
     padding: 20,
     justifyContent: "center",
@@ -194,8 +194,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   loginContainer: {
-    width: "100%",
-    flexGrow: 1,
+    width: isTablet ? "50%" : "100%",
     borderRadius: 5,
   },
   heading: {

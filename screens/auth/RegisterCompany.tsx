@@ -94,9 +94,14 @@ export function RegisterCompany({ navigation, config, ip }: any) {
 
   return (
     <KeyboardAvoidingView
-      style={{ width: "100%", justifyContent: "center", alignItems: "center" }}
+      style={{
+        width: "100%",
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: config.backgroundColor,
+      }}
     >
-      <View style={[styles.container, { backgroundColor: "#FFFFFF" }]}>
+      <View style={[styles.container]}>
         <ScrollView
           style={[styles.registerContainer]}
           keyboardShouldPersistTaps="handled"
@@ -223,7 +228,7 @@ export function RegisterCompany({ navigation, config, ip }: any) {
 
 const styles = StyleSheet.create({
   container: {
-    width: isTablet ? "70%" : "100%",
+    width: isTablet ? "60%" : "100%",
     height: "100%",
     padding: 20,
     justifyContent: "center",
