@@ -9,6 +9,8 @@ import {
   Dimensions,
 } from "react-native";
 import axios from "axios";
+import Feather from "@expo/vector-icons/Feather";
+import { AntDesign } from "@expo/vector-icons";
 
 const { width } = Dimensions.get("screen");
 const isTablet = width > 600;
@@ -23,6 +25,7 @@ type StaffType = {
   contact: string;
   address: string;
   role: string;
+  salary: string;
   joinedDate: string;
   image?: string; // Now a base64 string (e.g., "data:image/jpeg;base64,...")
   __v?: number;
@@ -45,39 +48,75 @@ export default function AllStaff({ config, ip }: any) {
   };
 
   const renderStaffItem = ({ item }: { item: StaffType }) => (
-    <TouchableOpacity style={styles.staffItem}>
+    <View
+      style={[
+        styles.staffItem,
+        isTablet && {
+          borderWidth: 1,
+          borderRadius: 10,
+          marginBottom: 20,
+          elevation: 3,
+          backgroundColor: "rgba(255, 255, 255, 0.95)"
+        }
+      ]}
+    >
       {item.image && (
         <Image
           source={{ uri: `http://${ip}:3000${item.image}` }} // Base64 string works directly
-          style={styles.staffImage}
+          style={[
+            {
+              width: isTablet ? 180 : 120,
+              height: isTablet ? 180 : 120,
+              borderRadius: 10,
+            }
+          ]}
         />
       )}
-
-      <View style={styles.staffDetails}>
+      <View style={[!isTablet && { marginLeft: 30}, isTablet && {margin: 0, padding: 0}]}>
         <Text style={[styles.staffName, { color: config.textPrimary }]}>
-          {item.fname} {item.lname} 
+          {item.fname} {item.lname}
         </Text>
-        <Text style={[styles.staffText, { color: config.textSecondary }]}>
-          Role: {item.role}
-        </Text>
-        <Text style={[styles.staffText, { color: config.textSecondary }]}>
-          NIC: {item.nic}
-        </Text>
-        <Text style={[styles.staffText, { color: config.textSecondary }]}>
-          Joined: {new Date(item.joinedDate).toLocaleDateString()}
-        </Text>
+        <View>
+          <View style={styles.staffDetails}>
+            <Text style={[styles.staffText, { color: config.textSecondary }]}>
+              <Text style={{ fontWeight: 700 }}>Position</Text>{"\n"}{item.role}
+            </Text>
+            <Text style={[styles.staffText, { color: config.textSecondary }]}>
+              <Text style={{ fontWeight: 700 }}>Salary</Text>{"\n"}Rs. {item.salary}
+            </Text>
+          </View>
+          <View style={[{ flexDirection: "row-reverse", gap: 20, marginLeft: 30, marginTop: 10, alignItems: "center" }]}>
+            <TouchableOpacity>
+                <View style={{ marginBottom: 10 }}>
+                  <AntDesign name={"delete"} size={25} color={"red"} />
+                </View>
+            </TouchableOpacity>
+            <TouchableOpacity>
+              <View style={{ marginBottom: 10 }}>
+                <Feather name={"edit"} size={25} color={config.textPrimaryColor} />
+              </View>
+            </TouchableOpacity>
+          </View>
+        </View>
       </View>
-    </TouchableOpacity>
+    </View>
   );
-
-
 
   return (
     <View style={styles.container}>
       <FlatList
         data={staffList}
+        numColumns={isTablet ? 3 : 1}
         renderItem={renderStaffItem}
         keyExtractor={(item) => item._id}
+        contentContainerStyle={{
+          alignItems: "center",
+          paddingHorizontal: 25,
+          paddingBottom: 15,
+        }}
+        columnWrapperStyle={
+          isTablet && { justifyContent: "space-between", gap: 20 }
+        }
         ListEmptyComponent={
           <Text style={{ textAlign: "center", color: config.textSecondary }}>
             No staff members found.
@@ -91,31 +130,31 @@ export default function AllStaff({ config, ip }: any) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 30,
+    paddingTop: isTablet ? 30 : 0,
   },
   staffItem: {
-    flexDirection: "row",
     padding: 15,
-    borderBottomWidth: 1,
-    borderBottomColor: "#ddd",
     alignItems: "center",
+    flexDirection: isTablet ? "column" : "row",
+    borderBottomWidth: 1,
+    borderColor: "#ddd"
   },
   staffImage: {
-    width: 60,
-    height: 60,
-    borderRadius: 30,
-    marginRight: 15,
+    width: 72,
+    height: 72,
+    borderRadius: 36,
+    marginRight: isTablet ? 0 : 15,
   },
   staffDetails: {
-    flex: 1,
   },
   staffName: {
-    fontSize: 18,
-    fontWeight: "bold",
+    marginTop: isTablet ? 0 : 15,
+    fontSize: isTablet ? 24 : 18,
+    fontWeight: 700,
     marginBottom: 5,
   },
   staffText: {
-    fontSize: 14,
+    fontSize: isTablet ? 20 : 14,
     marginBottom: 2,
   },
 });

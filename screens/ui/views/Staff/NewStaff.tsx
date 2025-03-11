@@ -35,6 +35,7 @@ export default function NewStaff({ config, ip }: any) {
     password: "",
     gender: "",
     nic: "",
+    salary: "",
     contact: "",
     address: "",
     role: "",
@@ -82,6 +83,7 @@ export default function NewStaff({ config, ip }: any) {
       nic: "",
       contact: "",
       address: "",
+      salary: "",
       role: user.role,
       dob: "",
     }));
@@ -107,6 +109,7 @@ export default function NewStaff({ config, ip }: any) {
         contact: user.contact,
         address: user.address,
         role: user.role,
+        salary: user.salary,
         gender: user.gender,
         joined: new Date().toISOString(),
         layoff: "N/A",
@@ -186,6 +189,14 @@ export default function NewStaff({ config, ip }: any) {
         </View>
         <TextInput
           style={[styles.input, { backgroundColor: config.backgroundColor, borderRadius: 10 }]}
+          placeholder="Basic Salary"
+          placeholderTextColor={config.textSecondary}
+          value={user.salary}
+          keyboardType={"decimal-pad"}
+          onChangeText={(text) => handleInputTextChange("salary", text)}
+        />
+        <TextInput
+          style={[styles.input, { backgroundColor: config.backgroundColor, borderRadius: 10 }]}
           placeholder="Date of Birth"
           placeholderTextColor={config.textSecondary}
           value={user.dob}
@@ -263,6 +274,8 @@ export default function NewStaff({ config, ip }: any) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    marginTop: isTablet ? "10%" : "0%",
+    width: isTablet ? "70%" : "100%",
     paddingBottom: 0,
     paddingTop: 30,
   },
@@ -276,17 +289,13 @@ const styles = StyleSheet.create({
     borderWidth: 1,
   },
   buttonGroup: {
-    flexDirection: isTablet ? "row" : "column",
     justifyContent: "space-between",
     paddingBottom: isTablet ? 0 : 25,
     width: "100%",
-    gap: isTablet ? "2.5%" : 0,
   },
   buttonStyle: {
-    flexShrink: 1,
-    width: "auto",
+    width: "100%",
     marginBottom: isTablet ? 0 : 15,
-    maxWidth: isTablet ? "95%" : "100%",
   },
   buttonText: {
     fontSize: 16,

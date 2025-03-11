@@ -8,6 +8,7 @@ export interface UserProps {
   contact: string;
   address: string;
   dob: string;
+  salary: string;
   role: string;
   image?: any;
   joined?: string;

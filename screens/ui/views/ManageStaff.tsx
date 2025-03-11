@@ -1,7 +1,10 @@
 import { useState } from "react";
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet, Dimensions } from "react-native";
 import AllStaff from "./Staff/AllStaff";
 import NewStaff from "./Staff/NewStaff";
+
+const { width } = Dimensions.get("screen");
+const isTablet = width > 600;
 
 export default function ManageStaffView({ config, ip }: any) {
   const [currentTab, setCurrentTab] = useState("All");
@@ -24,7 +27,7 @@ export default function ManageStaffView({ config, ip }: any) {
       style={[styles.container, { backgroundColor: config.backgroundColor }]}
     >
       <Text style={styles.header}>Staff Details</Text>
-      <View style={[styles.tabBar, { backgroundColor: config.surfaceColor }]}>
+      <View style={[styles.tabBar, { backgroundColor: config.surfaceColor, borderRadius: 35 }]}>
         <View
           style={[
             styles.tabBarButton,
@@ -61,17 +64,17 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 15,
+    alignItems: "center",
   },
   header: {
-    marginLeft: 5,
     marginTop: 40,
-    fontSize: 24,
+    fontSize: isTablet ? 28 : 24,
     fontWeight: 600,
+    marginBottom: isTablet ? 30 : 10,
   },
   tabBar: {
-    marginTop: 10,
+    width: isTablet ? "50%" : "100%",
     padding: 8,
-    borderRadius: 30,
     gap: 10,
     flexDirection: "row",
     justifyContent: "space-between",
@@ -82,7 +85,7 @@ const styles = StyleSheet.create({
   },
   tabBarButtonText: {
     textAlign: "center",
-    fontSize: 15,
+    fontSize: isTablet ? 20 : 14,
     fontWeight: 600,
   },
 });

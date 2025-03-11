@@ -6,8 +6,8 @@ import {
   StyleSheet,
   Dimensions,
 } from "react-native";
-import AllProducts from "./Inventory/AllProducts";
-import NewProduct from "./Inventory/NewProduct";
+import AllProducts from "./Product/AllProducts";
+import NewProduct from "./Product/NewProduct";
 
 const { width } = Dimensions.get("window");
 const isTablet = width >= 600;
@@ -95,5 +95,6 @@ const styles = StyleSheet.create({
   tabBarButtonText: {
     textAlign: "center",
     fontSize: isTablet ? 20 : 14,
+    fontWeight: 600,
   },
 });

@@ -7,13 +7,13 @@ import { RegisterAccount } from "./screens/auth/RegisterAccount";
 import { PrimaryUI } from "./screens/ui/PrimaryUI";
 import { RegisterCompany } from "./screens/auth/RegisterCompany";
 import { CompanyProps } from "./interfaces/company";
-import axios from "axios";
+// import axios from "axios";
 
 const Stack = createStackNavigator();
 
 export default function App() {
-  const ip = "172.20.25.176";
-  const config: Configuration = {
+  const ip = "172.20.28.28";
+  const config: Configuration = { 
     name: "default",
     primaryColor: "#06C167",
     secondaryColor: "#142328",

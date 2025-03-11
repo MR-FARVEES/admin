@@ -6,6 +6,7 @@ import { Ionicons } from "@expo/vector-icons";
 import DashboardView from "./views/Dashboard";
 import ManageStaffView from "./views/ManageStaff";
 import ManageProductView from "./views/MangeProduct";
+import ManageInventoryView from "./views/ManageInventory";
 
 const Tab = createBottomTabNavigator();
 
@@ -87,6 +88,9 @@ export function PrimaryUI({ navigation, config, ip, company }: any) {
       </Tab.Screen>
       <Tab.Screen name="Products" initialParams={config}>
         {(props: any) => <ManageProductView {...props} config={config} ip={ip} />}
+      </Tab.Screen>
+      <Tab.Screen name="Inventory" initialParams={config}>
+        { (porps: any) => <ManageInventoryView {...porps} config={config} ip={ip} />}
       </Tab.Screen>
     </Tab.Navigator>
   );

@@ -40,15 +40,11 @@ export default function AllProducts({ config, ip }: any) {
   const [modalData, setModalData] = useState({
     _id: "",
     name: "",
-    price: 0,
+    price: 0,   
     cost: 0,
     qty: 0,
     image: "",
   });
-
-  useEffect(() => {
-    fetchProductList();
-  }, []);
 
   useEffect(() => {
     fetchProductList();
@@ -116,13 +112,18 @@ export default function AllProducts({ config, ip }: any) {
           borderRadius: isTablet ? 10 : 36,
         }}
       />
-      <Text
+      { isTablet && <Text
         style={{ fontSize: isTablet ? 22 : 18, fontWeight: 700, marginTop: 15 }}
       >
         {item.name}
-      </Text>
+      </Text>}
       <View style={[{ flexDirection: "row" }, isTablet && { paddingTop: 15 }]}>
         <View style={style.productItemInfo}>
+          { !isTablet && <Text
+            style={{ fontSize: isTablet ? 22 : 18, fontWeight: 700, marginTop: 15 }}
+          >
+            {item.name}
+          </Text>}
           <View style={{ flexDirection: "row" }}>
             <Text
               style={{
@@ -216,7 +217,7 @@ export default function AllProducts({ config, ip }: any) {
           </TouchableOpacity>
           <TouchableOpacity>
             <View>
-              <AntDesign name="delete" size={24} color="black" />
+              <AntDesign name="delete" size={24} color="red" />
             </View>
           </TouchableOpacity>
         </View>
@@ -276,7 +277,7 @@ export default function AllProducts({ config, ip }: any) {
                 <Text
                   style={[
                     {
-                      fontSize: 18,
+                      fontSize: isTablet ? 18 : 14,
                       fontWeight: 600,
                     },
                     currentCategory === category && {
